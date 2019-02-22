@@ -24,6 +24,7 @@ To install the program, simply download the current versions `.rar` file, open i
 After launch, the program will require you to input your sensitivity. Float values (such as 2.45) are allowed. (Default is 1. Inputting a character rather than a number will cause the program to use default sensitivity.)
 After setting your sensitivity, you may invert the triggers and shoulder buttons (LB/RB).
 > See Keybinds.txt for more information regarding inverting
+
 *Inputting anything other than 'yes' will keep the default settings.*
 
 # How do I contribute?
