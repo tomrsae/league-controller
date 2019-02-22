@@ -15,9 +15,9 @@ The program should run on any kind of Windows computer and supports both XBOX On
 If you want a different type of relaxed gameplay for LOL, this should be on your bucket list. Installation is easy and starting the program takes a couple of seconds, requiring you to input 2 things.
 
 # How do I use this program?
-To install the program, simply download the current versions `.rar` file, open it and run `LeagueController.exe`.
+To install the program, simply download the current versions `.rar` file, open it and run `LeagueController.exe`
 
-After launch, the program will require you to input your sensitivity. Float values (such as 2.45) is allowed. (Default is 1. Inputting a character rather than a number will cause the program to use default sensitivity.)
+After launch, the program will require you to input your sensitivity. Float values (such as 2.45) are allowed. (Default is 1. Inputting a character rather than a number will cause the program to use default sensitivity.)
 After setting your sensitivity, you may invert the triggers and shoulder buttons (LB/RB).
 > See Keybinds.txt for more information regarding inverting
 *Inputting anything other than 'yes' will keep the default settings.*
