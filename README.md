@@ -1,11 +1,14 @@
 # League Controller
 Adds XBOX One controller support for 'League of Legends'.
 This software was created for no other use than to provide a different type of gameplay in the popular MOBA.
+
 The software does not give the user any kind of advantage over the other players in the game. If anything, it puts the user at a dis-advantage.
+
 **I highly recommend using locked camera while using this software**
 
 # Who is this for?
 My goal when creating this program was to make an efficient program with high performance.
+
 The program should run on any kind of Windows computer and supports both XBOX One and XBOX 360 controllers.
 **(An XINPUT emulator for PS4 controllers may work, as well.)**
 
