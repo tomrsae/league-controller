@@ -32,7 +32,7 @@ If you feel you can help with any of the above, feel free to contact me on Disco
 
 ## Other notable information
 This program is tested on a variety of computers, and works as supposed on every tested device.
-CPU usage should be around < 5% during initialization, and should stay at 0% - 1% CPU usage for the actual functionality.
+CPU usage should be around < 5% during initialization, and should stay at 0% - 1% CPU usage after initialization is finished and controller is being used.
 Memory usage is around ~5MB.
 
 ## Upcoming changes/features
