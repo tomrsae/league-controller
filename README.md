@@ -8,7 +8,7 @@ The software does not give the user any kind of advantage over the other players
 
 ### This software is still in BETA
 The program is still in beta, therefore, it lacks certain features that I am planning on implementing.
-Some bugs may also occur, but after having used this myself since 2.3, I haven't experienced any unexpected behaviour yet.
+Some bugs may also occur, but after having used this myself, since 2.3 I haven't experienced any unexpected behaviour yet.
 
 # Who is this for?
 My goal when creating this program was to make an efficient program with high performance.
