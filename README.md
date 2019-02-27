@@ -43,6 +43,7 @@ Memory usage is around ~5MB.
 ## Upcoming changes/features
 I'm planning on improving and expanding upon this project. Suggestions are also welcome.
 Here are some planned changes coming in the future:
+ - ON/OFF keybind
  - Customizable keybinds
  - Camera movement with RS
  - Friendlier user interface (graphical intead of command-line)
