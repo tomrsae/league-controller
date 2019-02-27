@@ -7,10 +7,10 @@
 
 namespace XWin
 {
-	class Buttons									// Defines XBOX 360/One controllers supported buttons and which actions can be performed with them
+	class Buttons // Defines XBOX 360/One controllers supported buttons and which actions can be performed with them
 	{
 	public:
-		const enum class ButtonFlag					// Flags for the supported XBOX buttons
+		const enum class ButtonFlag // Flags for the supported XBOX buttons
 		{
 			A = 0x1000,
 			B = 0x2000,
@@ -34,21 +34,16 @@ namespace XWin
 			NONE = 0x0000
 		};
 
-		struct Button										// Defines a supported controller button
+		struct Button // Defines a supported controller button
 		{
-			ButtonFlag bFlag;								// Button identifier
-			std::function<void(bool*)> fBtnFunctionality;	// Button functionality. Supported functionality defined in `ButtonFunctions` struct, and is to be passed with the ctor
+			ButtonFlag bFlag; 			 	// Button identifier
+			std::function<void(bool*)> fBtnFunctionality; 	// Button functionality. Supported functionality defined in `ButtonFunctions` struct, and is to be passed with the ctor
 
-			Button(ButtonFlag flag,
-				std::function<void(bool*)> func
-			)												// Main ctor
-			{
-				bFlag = flag;
-				fBtnFunctionality = func;
-			}
+			Button(ButtonFlag flag, std::function<void(bool*)> func)
+				: bFlag(flag), fBtnFunctionality(func) { } // ctor
 		};
 
-		static bool identifyButton(const ButtonFlag &flag)	// Determines whether flag is a supported button and saves it for future reference
+		static bool identifyButton(const ButtonFlag &flag) // Determines whether flag is a supported button and saves it for future reference
 		{
 			for (auto btn : buttons)
 			{
@@ -64,41 +59,42 @@ namespace XWin
 
 		static Button* getLastClicked() { return &lastBtnUsed; }
 
-		static bool							TRIGGERINVERTED;
-		static std::array<Button, 14>		buttons;		// Supported buttons
+		static bool		 	TRIGGERINVERTED;	// Determines wheter triggers should be inverted
+		static std::array<Button, 14> 	buttons;		// Supported buttons
 	private:
 		struct ButtonFunction
 		{
 			// bool parameter determines whether button was released when function is called
 
-			static void A(bool*);	// Mouse left click functionality
+			static void A(bool*);			// Q Spell
 
-			static void B(bool*);	// Imitates BACKSPACE key (for deleting text and going back on history inside browser)
+			static void B(bool*);			// W Spell
 
-			static void X(bool*);	// Mouse right click functionality
+			static void X(bool*);			// E Spell
 
-			static void Y(bool*);	// Imitates RETURN(enter) key to make selection in menus and submit forms
+			static void Y(bool*);			// R Spell
 
-			static void DPAD_UP(bool*);	// UP arrow key
+			static void DPAD_UP(bool*);		// Active item 1
 
-			static void DPAD_DOWN(bool*);	// DOWN arrow key 
+			static void DPAD_RIGHT(bool*);		// Active item 2
 
-			static void DPAD_LEFT(bool*);	// LEFT arrow key
+			static void DPAD_DOWN(bool*);		// Trinket
 
-			static void DPAD_RIGHT(bool*);	// RIGHT arrow key
+			static void DPAD_LEFT(bool*);		// Shop
 
-			static void LB(bool*);	// notset*
+			static void LB(bool*);			// Summoner Spell 1 - (B - Recall if inverted)
 
-			static void RB(bool*);	// notset*
+			static void RB(bool*);			// Summoner Spell 2 - (Move - Right click if inverted)
 
-			static void START(bool*);	// Opens Windows Start menu
+			static void START(bool*);		// ESC  - Opens in-game Start menu/Quick-close menus
 
-			static void BACK(bool*);	// Imitates Windows Key + TAB to select from open processes in current desktop
+			static void BACK(bool*);		// TAB - Stat Screen
 
-			static void THUMB_L(bool*);	// Middle mouse button functionality - may be both toggled and held
+			static void THUMB_L(bool*);		// T - Emote
 
-			static void THUMB_R(bool*);	// notset*
+			static void THUMB_R(bool*);		// Left click
 
+		private:
 			static void keyInput(bool*,		// Helper function - simulates keypresses on keyboard
 				const WORD&);
 
@@ -106,7 +102,7 @@ namespace XWin
 				const WORD&,
 				const WORD&);
 		};
-		static Button					lastBtnUsed;		// Stores which button was pressed to perform release action
-
+		
+		static Button lastBtnUsed; // Stores which button was pressed to perform release action later
 	};
 }
