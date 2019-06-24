@@ -19,7 +19,7 @@ The program should run on any kind of Windows computer and supports both XBOX On
 If you want a different type of relaxed gameplay for LOL, this should be on your bucket list. Installation is easy and starting the program takes a couple of seconds, requiring you to input 2 things.
 
 # How do I use this program?
-To install the program, simply download the current versions `.rar` file, open it and run `LeagueController.exe`
+To install the program, simply download the current versions `.exe` file from the "Releases" tab, open it and run. No additional files are necessary.
 
 After launch, the program will require you to input your sensitivity. Float values (such as 2.45) are allowed. (Default is 1. Inputting a character rather than a number will cause the program to use default sensitivity.)
 After setting your sensitivity, you may invert the triggers and shoulder buttons (LB/RB).
@@ -38,7 +38,7 @@ If you feel you can help with any of the above, feel free to contact me on Disco
 ## Other notable information
 This program is tested on a variety of computers, and works as supposed on every tested device.
 CPU usage should be around < 5% during initialization, and should stay at 0% - 1% CPU usage after initialization is finished and controller is being used.
-Memory usage is around ~5MB.
+Memory usage is around ~6MB.
 
 ## Upcoming changes/features
 I'm planning on improving and expanding upon this project. Suggestions are also welcome.
