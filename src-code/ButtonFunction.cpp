@@ -1,4 +1,5 @@
 #include "Buttons.h"
+#include <vector>
 
 namespace XWin
 {

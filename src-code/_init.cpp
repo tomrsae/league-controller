@@ -37,6 +37,4 @@ namespace XWin
 
 	POINT CursorManager::pCursor = POINT();
 
-	Buttons::Button Buttons::lastBtnUsed = Button(Buttons::ButtonFlag::NONE, [](bool) { return false; });
-
 }

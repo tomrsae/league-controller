@@ -12,7 +12,7 @@ namespace XWin
 
 		static const int TRIGGER_DEADZONE = 10;		// Defines deadzone for triggers - triggers should not work unless they are being pushed further in that this defines
 
-		XINPUT_GAMEPAD* m_xgPad;					// A reference to the controller being used, to read real-time information of triggers
+		XINPUT_GAMEPAD* m_xgPad;					// A reference to the controller being used, to read real-time information from triggers
 
 	public:
 		Triggers(XINPUT_GAMEPAD* gPad)				// Default ctor

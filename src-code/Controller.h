@@ -11,7 +11,7 @@ namespace XWin {
 	private:
 		// Utility
 		std::thread::id	m_mainThread;				// ID of main thread, used to make sure threads are joined to the proper main thread, not to itself/eachother
-		bool			m_initConnectionFinished;	// Becomes true once first connection was successfull and threads are initialized. False by default
+		bool			m_initConnectionFinished;	// Becomes true once first connection was successful and threads are initialized. False by default
 
 		XINPUT_STATE	m_xsState;					// Contains information about the current connected controller
 		std::thread		m_tAsyncJoystickThread;		// Thread responsible for calling `registerJoystickInput` asynchronously
@@ -23,7 +23,6 @@ namespace XWin {
 						= Joysticks(&m_xsState.Gamepad);
 		Triggers		m_triggers					// Trigger information
 						= Triggers(&m_xsState.Gamepad);
-		bool			m_buttonActive;				// True if any button is being held down. False by default
 
 		void			registerJoystickInput();	// Loop that checks if joystick(s) is outside of deadzone. Perform action if joystick(s) is outside of deadzone
 		void			registerTriggerInput();		// Loop that checks if trigger(s) is outside of deadzone. Perform action if trigger(s) is outside of deadzone

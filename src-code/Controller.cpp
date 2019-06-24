@@ -3,13 +3,14 @@
 namespace XWin
 {
 	Controller::Controller()
+		: m_mainThread(std::this_thread::get_id()),
+		m_initConnectionFinished(false)
 	{
-		m_mainThread = std::this_thread::get_id();
-		m_buttonActive = false;
-		m_initConnectionFinished = false;
 	}
 
 	Controller::Controller(const Controller &)
+		: m_mainThread(std::this_thread::get_id()),
+		m_initConnectionFinished(false)
 	{
 	}
 
@@ -17,7 +18,6 @@ namespace XWin
 	{
 		if (std::this_thread::get_id() == m_mainThread)
 		{
-			std::thread::id a = std::this_thread::get_id();
 			if (m_tAsyncJoystickThread.joinable())
 				m_tAsyncJoystickThread.join();
 
@@ -26,7 +26,6 @@ namespace XWin
 
 			if (m_tAsyncButtonThread.joinable())
 				m_tAsyncButtonThread.join();
-
 		}
 	}
 
@@ -39,9 +38,9 @@ namespace XWin
 			if (!m_initConnectionFinished
 				&& std::this_thread::get_id() == m_mainThread)
 			{
-				m_tAsyncJoystickThread	= std::thread(&Controller::registerJoystickInput, this);
-				m_tAsyncTriggerThread	= std::thread(&Controller::registerTriggerInput, this);
-				m_tAsyncButtonThread	= std::thread(&Controller::registerButtonInput, this);
+				m_tAsyncJoystickThread = std::thread(&Controller::registerJoystickInput, this);
+				m_tAsyncTriggerThread = std::thread(&Controller::registerTriggerInput, this);
+				m_tAsyncButtonThread = std::thread(&Controller::registerButtonInput, this);
 
 				m_initConnectionFinished = true;
 			}
@@ -146,38 +145,36 @@ namespace XWin
 
 	void Controller::registerButtonInput()
 	{
+		Buttons::Button* clickedBtn = new Buttons::Button();
+
 		while (isConnected())
 		{
-			if (m_buttonActive || static_cast<Buttons::ButtonFlag>(m_xsState.Gamepad.wButtons) != Buttons::ButtonFlag::NONE)
-			{
-				Buttons::ButtonFlag activeButton = static_cast<Buttons::ButtonFlag>(m_xsState.Gamepad.wButtons);
+			Buttons::ButtonFlag activeButton = static_cast<Buttons::ButtonFlag>(m_xsState.Gamepad.wButtons);
+			Buttons::identifyButton(activeButton, clickedBtn);
 
-				if (m_buttonActive
-					&& activeButton != Buttons::ButtonFlag::NONE)
+			// Button is clicked
+			if (clickedBtn && activeButton != Buttons::ButtonFlag::NONE)
+			{
+				if (clickedBtn->active)
 				{
 					// Button is being held down
 				}
-
-				if (!m_buttonActive
-					&& activeButton != Buttons::ButtonFlag::NONE)
+				else
 				{
-					// Button is clicked
-					if (Buttons::identifyButton(activeButton))
-					{
-						Buttons::getLastClicked()->fBtnFunctionality(&m_buttonActive);
-					}
+					clickedBtn->performAction();
 				}
-
-				if (m_buttonActive
-					&& activeButton == Buttons::ButtonFlag::NONE)
+			}
+			else
+			{
+				if (clickedBtn && clickedBtn->active)
 				{
-					// Button is released
-					Buttons::getLastClicked()->fBtnFunctionality(&m_buttonActive);
+					clickedBtn->performAction();
 				}
 			}
 
-			std::this_thread::sleep_for(std::chrono::microseconds(25));
+			std::this_thread::sleep_for(std::chrono::milliseconds(25));
 		}
+
+		delete clickedBtn;
 	}
 }
-

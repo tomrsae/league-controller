@@ -3,14 +3,13 @@
 #include <array>
 #include <functional>
 
-#define KEYEVENTF_KEYDOWN 0
-
 namespace XWin
 {
-	class Buttons // Defines XBOX 360/One controllers supported buttons and which actions can be performed with them
+	class Buttons									// Defines XBOX 360/One controllers supported buttons and which actions can be performed with them
 	{
 	public:
-		const enum class ButtonFlag // Flags for the supported XBOX buttons
+
+		const enum class ButtonFlag					// Flags for the supported XBOX buttons
 		{
 			A = 0x1000,
 			B = 0x2000,
@@ -34,37 +33,47 @@ namespace XWin
 			NONE = 0x0000
 		};
 
-		struct Button // Defines a supported controller button
+		struct Button										// Defines a supported controller button
 		{
-			ButtonFlag bFlag; 			 	// Button identifier
-			std::function<void(bool*)> fBtnFunctionality; 	// Button functionality. Supported functionality defined in `ButtonFunctions` struct, and is to be passed with the ctor
+		public:
+			ButtonFlag bFlag;								// Button identifier
+			bool active;
+
+			void performAction()
+			{
+				fBtnFunctionality(&active);
+			}
 
 			Button(ButtonFlag flag, std::function<void(bool*)> func)
-				: bFlag(flag), fBtnFunctionality(func) { } // ctor
+				: bFlag(flag), fBtnFunctionality(func), active(false) { }
+
+			Button() : bFlag(ButtonFlag::NONE), fBtnFunctionality([](bool) { return false; }), active(false) { }
+		private:
+			std::function<void(bool*)> fBtnFunctionality;	// Button functionality. Supported functionality defined in `ButtonFunctions` struct, and is to be passed with the ctor
 		};
 
-		static bool identifyButton(const ButtonFlag &flag) // Determines whether flag is a supported button and saves it for future reference
+		static bool identifyButton(const ButtonFlag &flag, Button *identifiedButton)	// Determines whether flag is a supported button and saves it for future reference
 		{
 			for (auto btn : buttons)
 			{
 				if (btn.bFlag == flag)
 				{
-					lastBtnUsed = btn;
+					if (!identifiedButton->active)
+						*identifiedButton = btn;
 					return true;
 				}
 			}
 
+			identifiedButton = nullptr;
 			return false;
 		}
 
-		static Button* getLastClicked() { return &lastBtnUsed; }
-
-		static bool		 	TRIGGERINVERTED;	// Determines wheter triggers should be inverted
-		static std::array<Button, 14> 	buttons;		// Supported buttons
+		static bool							TRIGGERINVERTED;	// Determines whether triggers should be inverted
+		static std::array<Button, 14>		buttons;			// Supported buttons
 	private:
 		struct ButtonFunction
 		{
-			// bool parameter determines whether button was released when function is called
+			// bool parameter determines whether button is pressed or released when function is called
 
 			static void A(bool*);			// Q Spell
 
@@ -76,11 +85,11 @@ namespace XWin
 
 			static void DPAD_UP(bool*);		// Active item 1
 
-			static void DPAD_RIGHT(bool*);		// Active item 2
+			static void DPAD_RIGHT(bool*);	// Active item 2
 
-			static void DPAD_DOWN(bool*);		// Trinket
+			static void DPAD_DOWN(bool*);	// Trinket
 
-			static void DPAD_LEFT(bool*);		// Shop
+			static void DPAD_LEFT(bool*);	// Shop
 
 			static void LB(bool*);			// Summoner Spell 1 - (B - Recall if inverted)
 
@@ -95,14 +104,12 @@ namespace XWin
 			static void THUMB_R(bool*);		// Left click
 
 		private:
-			static void keyInput(bool*,		// Helper function - simulates keypresses on keyboard
+			static void keyInput(bool*,		// Helper function - simulates keypresses on keyboard using scancodes
 				const WORD&);
 
-			static void mouseInput(bool*,		// Helper function - simulates mouse button clicks
+			static void mouseInput(bool*,	// Helper function - simulates mouse button clicks
 				const WORD&,
 				const WORD&);
 		};
-		
-		static Button lastBtnUsed; // Stores which button was pressed to perform release action later
 	};
 }
