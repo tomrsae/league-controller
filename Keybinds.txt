@@ -1,0 +1,21 @@
+A = Q spell
+X = E spell
+B = W spell
+Y = R spell (ultimate ability)
+
+LB = Summoner spell 1 (D)
+RB = Summoner spell 2 (F)
+
+START = ESC (in-game menu or close shop)
+BACK  = TAB (stat-screen)
+
+DPAD UP    = Active item 1
+DPAD RIGHT = Active item 2
+DPAD DOWN  = Active item 3
+DPAD LEFT  = Active item 4
+
+Left joystick = Move cursor
+Right joystick (CLICK) = Left mouseclick
+
+Right trigger (RT) = Spam right-click - Move
+Left trigger (LT) = Recall (B)
