@@ -10,10 +10,10 @@ namespace XWin {
 	{
 	private:
 		// Utility
-		std::thread::id	m_mainThread;				// ID of main thread, used to make sure threads are joined to the proper main thread, not to itself/eachother
+		std::thread::id		m_mainThread;			// ID of main thread, used to make sure threads are joined to the proper main thread, not to itself/eachother
 		bool			m_initConnectionFinished;	// Becomes true once first connection was successful and threads are initialized. False by default
 
-		XINPUT_STATE	m_xsState;				// Contains information about the current connected controller
+		XINPUT_STATE		m_xsState;			// Contains information about the current connected controller
 		std::thread		m_tAsyncJoystickThread;		// Thread responsible for calling `registerJoystickInput` asynchronously
 		std::thread		m_tAsyncTriggerThread;		// Thread responsible for calling `registerTriggerInput` asynchronously
 		std::thread		m_tAsyncButtonThread;		// Thread responsible for calling `registerButtonInput` asynchronously
